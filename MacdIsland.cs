@@ -1,10 +1,9 @@
 ﻿using System;
-using QuantTC;
 using QuantTC.Indicators.Generic;
 
 namespace QuantIX.MACD
 {
-	public class MacdIsland
+    public class MacdIsland
 	{
 		public MacdIsland(IIndicator<double> source, int islandMinCount)
 		{
@@ -34,56 +33,5 @@ namespace QuantIX.MACD
 		/// Count the islands in the past
 		/// </summary>
 		public IIndicator<int> IslandCounter { get; }
-	}
-
-	public class MacdIslandCounter : Indicator<int>
-	{
-		public MacdIslandCounter(IIndicator<int> left)
-		{
-			Left = left;
-			Left.Update += Left_Update;
-		}
-
-		private void Left_Update()
-		{
-			Data.FillRange(Count, Left.Count, i => i > 0 ? (Left[i - 1] != Left[i] ? Data[i - 1] + 1 : Data[i - 1]) : 1);
-			FollowUp();
-		}
-
-		private IIndicator<int> Left { get; }
-	}
-
-	public class MacdIslandRangeTuple : Indicator<Tuple<int, int>>
-	{
-		public MacdIslandRangeTuple(IIndicator<int> left)
-		{
-			Left = left;
-			Left.Update += Left_Update;
-		}
-
-		private void Left_Update()
-		{
-			Functions.Range(Prev, Left.Count).ForEach(i =>
-			{
-				if (i == 0)
-				{
-					Data.Add(Tuple.Create(0, 1));
-				}
-				else if (Left[i] != Left[i - 1])
-				{
-					Data[Count - 1] = Tuple.Create(Left[i - 1], Left[i]);
-					Data.Add(Tuple.Create(Left[i], Left.Count));
-				}
-				else
-				{
-					Data[Count - 1] = Tuple.Create(Left[i], Left.Count);
-				}
-			});
-			Prev = Left.Count;
-			FollowUp();
-		}
-
-		private IIndicator<int> Left { get; }
-		private int Prev { get; set; }
 	}
 }

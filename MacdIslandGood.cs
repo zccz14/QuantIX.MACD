@@ -38,6 +38,7 @@ namespace QuantIX.MACD
 				}
 				return true;
 			});
+            FollowUp();
 		}
 
 		private IIndicator<double> Source { get; }

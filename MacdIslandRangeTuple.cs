@@ -1,6 +1,7 @@
 ﻿using System;
 using QuantTC;
 using QuantTC.Indicators.Generic;
+using static QuantTC.X;
 
 namespace QuantIX.MACD
 {
@@ -25,7 +26,7 @@ namespace QuantIX.MACD
         /// </summary>
         private void Left_Update()
         {
-            Functions.Range(Prev, Left.Count).ForEach(i =>
+            Range(Prev, Left.Count).ForEach(i =>
             {
                 if (i == 0)
                 {

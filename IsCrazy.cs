@@ -2,7 +2,7 @@
 using QuantTC;
 using QuantTC.Data;
 using QuantTC.Indicators.Generic;
-using static QuantTC.Functions;
+using static QuantTC.X;
 using System.Linq;
 
 namespace QuantIX.MACD

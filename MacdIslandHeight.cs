@@ -15,6 +15,7 @@ namespace QuantIX.MACD
 			Source = source;
 			Left = left;
 			Source.Update += Source_Update;
+		    Left.Update += Source_Update;
 		}
         /// <summary>
         /// Left[i] == Left[i - 1] 表示是同一个岛，在同一个岛中，每一个high表示从开始位置到当前位置的最高值，并不是整个岛的最高值
@@ -23,7 +24,7 @@ namespace QuantIX.MACD
         /// </summary>
 		private void Source_Update()
 		{
-			Data.FillRange(Count, Source.Count, i =>
+			Data.FillRange(Count, Math.Min(Source.Count, Left.Count), i =>
 			{
 				if (i > 0 && Left[i] == Left[i - 1])
 				{

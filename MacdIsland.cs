@@ -17,8 +17,10 @@ namespace QuantIX.MACD
 			RangeTuple = new MacdIslandRangeTuple(Left);
 			IslandCounter = new MacdIslandCounter(Left);
 		}
-
-		private IIndicator<double> Source { get; }
+        /// <summary>
+        /// MACD Data
+        /// </summary>
+	    public IIndicator<double> Source { get; }
 		public int IslandMinCount { get; }
 		public IIndicator<int> Bars { get; }
 		public MacdIslandLeft Left { get; }
